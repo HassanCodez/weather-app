@@ -14,6 +14,9 @@ export interface WeatherResponse {
   name: string;
   cod: number;
 }
+export interface GroupWeatherResponse {
+  list: WeatherResponse[];
+}
 
 export interface Coord {
   lon: number;
