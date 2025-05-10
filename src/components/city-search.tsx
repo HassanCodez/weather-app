@@ -2,14 +2,7 @@
 
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Loader2 } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCitySearchWorker } from "@/hooks/useCitySearchWorker";
 import Image from "next/image";
 
@@ -19,19 +12,14 @@ export default function CitySearch() {
 
   const handleChange = (value: string) => {
     setQuery(value);
-    if (value.length >= 2) {
-      search(value);
-    }
+    search(value);
   };
 
   return (
     <div className="container mx-auto py-10">
-      <Card className="max-w-2xl mx-auto">
+      <Card className="border-none">
         <CardHeader>
           <CardTitle>City Search</CardTitle>
-          <CardDescription>
-            Powered by Fuse.js in a Web Worker for performance.
-          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <Input
@@ -45,12 +33,18 @@ export default function CitySearch() {
           <div className="space-y-4">
             {loading ? (
               <div className="flex justify-center py-8">
-                <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+                <Image
+                  src={"/loader.svg"}
+                  width={50}
+                  height={50}
+                  alt="Loading..."
+                  className="animate-bounce"
+                />
               </div>
             ) : results.length > 0 ? (
               <div className="space-y-2">
                 <h3 className="text-sm font-medium">
-                  Found {results.length}{" "}
+                  Top {results.length}{" "}
                   {results.length === 1 ? "result" : "results"}
                 </h3>
                 <div className="grid gap-2">
@@ -74,7 +68,7 @@ export default function CitySearch() {
                   ))}
                 </div>
               </div>
-            ) : query.length > 1 ? (
+            ) : query.length > 2 ? (
               <p className="text-center py-8 text-muted-foreground">
                 No cities found
               </p>

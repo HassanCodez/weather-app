@@ -25,40 +25,7 @@ export function useCitySearchWorker() {
   const [loading, setLoading] = useState(false);
 
   const { data, refetch } = useGetGroupWeather(cityIds!);
-  useEffect(() => {
-    if (cityIds) {
-      console.log("test");
-      refetch();
-    }
-  }, [cityIds]);
 
-  useEffect(() => {
-    if (!data?.list || rawResults.length === 0) return;
-
-    const weatherMap = new Map<number, WeatherResponse>();
-    data.list.forEach((entry) => {
-      weatherMap.set(entry.id, entry);
-    });
-
-    const merged = rawResults
-      .map((r) => {
-        const weather = weatherMap.get(r.item.id);
-        if (!weather) return null;
-
-        return {
-          id: r.item.id,
-          name: r.item.name,
-          country: r.item.country,
-          temp: weather.main.temp,
-          icon: weather.weather?.[0]?.icon || "",
-        };
-      })
-      .filter(Boolean) as EnrichedResult[];
-
-    setEnrichedResults(merged);
-  }, [data, rawResults]);
-
-  // 🧠 Create and init worker ONCE
   useEffect(() => {
     const worker = new Worker(
       new URL("../workers/fuseWorker.ts", import.meta.url),
@@ -108,7 +75,39 @@ export function useCitySearchWorker() {
     };
   }, []);
 
-  // 🕓 Debounced search method
+  useEffect(() => {
+    if (cityIds) {
+      refetch();
+    }
+  }, [cityIds]);
+
+  useEffect(() => {
+    if (!data?.list || rawResults.length === 0) {
+      return;
+    }
+    const weatherMap = new Map<number, WeatherResponse>();
+    data.list.forEach((entry) => {
+      weatherMap.set(entry.id, entry);
+    });
+
+    const merged = rawResults
+      .map((r) => {
+        const weather = weatherMap.get(r.item.id);
+        if (!weather) return null;
+
+        return {
+          id: r.item.id,
+          name: r.item.name,
+          country: r.item.country,
+          temp: weather.main.temp,
+          icon: weather.weather?.[0]?.icon || "",
+        };
+      })
+      .filter(Boolean) as EnrichedResult[];
+
+    setEnrichedResults(merged);
+  }, [data, rawResults]);
+
   const search = useMemo(
     () =>
       debounce((query: string) => {

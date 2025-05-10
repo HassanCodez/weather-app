@@ -5,6 +5,7 @@ import { useCurrentWeather } from "@/hooks/useCurrentWeather";
 import { useUserInfo } from "@/hooks/useUserInfo";
 import Image from "next/image";
 import WeatherCard from "./weather-card";
+import WeatherCardSkeleton from "./weather-card-skeleton";
 const CurrentWeather = () => {
   const { user, isLoading: userLoading, error: userError } = useUserInfo();
   const {
@@ -13,22 +14,12 @@ const CurrentWeather = () => {
     error: weatherError,
   } = useCurrentWeather();
   if ((userLoading || weatherLoading) && !weatherError && !userError) {
-    return (
-      <div className="min-h-screen flex justify-center items-center">
-        <Image
-          src={"/loader.svg"}
-          width={250}
-          height={250}
-          alt="Loading..."
-          className="animate-bounce"
-        />
-      </div>
-    );
+    return <WeatherCardSkeleton />;
   }
   // console.log(userError, weatherError);
   if ((userError || weatherError) && !userLoading && !weatherLoading) {
     return (
-      <div className="min-h-screen flex flex-col justify-center items-center gap-5">
+      <div className="flex flex-col justify-center items-center gap-5">
         <Image
           src={"/error.png"}
           width={250}
@@ -43,7 +34,7 @@ const CurrentWeather = () => {
 
   if (data && user) {
     return (
-      <div className="container mx-auto min-h-[80vh]">
+      <div className="container mx-auto">
         <WeatherCard
           city={user.city}
           icon={WEATHER_ICON_URL(data.weather[0].icon)}

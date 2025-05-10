@@ -18,7 +18,6 @@ self.onmessage = async (e: MessageEvent) => {
       const options: IFuseOptions<City> = {
         keys: ["name"],
         threshold: 0.3,
-        includeScore: true,
       };
 
       fuse = new Fuse(cities, options);
