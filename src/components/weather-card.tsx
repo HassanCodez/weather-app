@@ -1,4 +1,4 @@
-import { Cloudy, Droplet, Star, Wind } from "lucide-react";
+import { Cloudy, Droplet, Heart, Wind } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { WeatherCardTypes } from "@/types/weather-types";
 import Image from "next/image";
@@ -14,9 +14,9 @@ const WeatherCard = (props: WeatherCardTypes) => {
         <CardTitle className="text-3xl flex justify-between items-center">
           <h1>{props.city}</h1>
           {props.fav && (
-            <Star
+            <Heart
               className={cn("cursor-pointer", {
-                "fill-yellow-300 stroke-yellow-500": isFavoriteCity(props),
+                "fill-red-500 stroke-red-600": isFavoriteCity(props),
               })}
               onClick={() =>
                 isFavoriteCity(props)

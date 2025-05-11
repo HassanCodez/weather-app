@@ -3,6 +3,8 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { useUserStore } from "@/stores/user-store";
 import WeatherCard from "./weather-card";
+import Image from "next/image";
+import { Heart } from "lucide-react";
 
 const Favorites = () => {
   const { user } = useUserStore();
@@ -12,7 +14,7 @@ const Favorites = () => {
         <CardTitle>Favorites</CardTitle>
       </CardHeader>
       <CardContent>
-        {user?.favoriteCities ? (
+        {user?.favoriteCities.length ? (
           user.favoriteCities.map((city) => (
             <WeatherCard
               key={city.city}
@@ -29,7 +31,13 @@ const Favorites = () => {
             />
           ))
         ) : (
-          <p>No favorite cities yet...</p>
+          <div className="flex flex-col justify-start items-center">
+            <Image src={"/empty.svg"} width={250} height={250} alt="empty" />
+            <p className="flex gap-1 items-center">
+              No favorite cities yet, click <Heart size={18} color="red" /> to
+              add it to the favorite
+            </p>
+          </div>
         )}
       </CardContent>
     </Card>

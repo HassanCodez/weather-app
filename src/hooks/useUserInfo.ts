@@ -1,6 +1,6 @@
 import { useUserStore } from "@/stores/user-store";
 import { UserIpInfo } from "@/types/user-types";
-import { extractLocation } from "@/util/extractLocation";
+import { extractLocation } from "@/utils/extractLocation";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 

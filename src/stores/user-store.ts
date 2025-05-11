@@ -1,5 +1,5 @@
 import { UserStore } from "@/types/user-types";
-import { encryptedStorage } from "@/util/encryptedStorage";
+import { encryptedStorage } from "@/utils/encryptedStorage";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
