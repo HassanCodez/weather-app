@@ -75,12 +75,12 @@ npm install
 yarn
 \`\`\`
 
-### 3. Create \`.env.local\`
+### 3. Create \`.env\`
 
 \`\`\`env
-NEXT_PUBLIC_WEATHER_KEY = e199faa3c79f1ee312e081e45971d27d
-NEXT_PUBLIC_IPINFO_TOKEN = c2ec4d3c9c6693
-NEXT_PUBLIC_SECRET_KEY = BitSecret
+NEXT_PUBLIC_WEATHER_KEY = openweathermap key
+NEXT_PUBLIC_IPINFO_TOKEN = ipinfo token
+NEXT_PUBLIC_SECRET_KEY = your secret key to encryption
 \`\`\`
 
 ### 4. Run the App
