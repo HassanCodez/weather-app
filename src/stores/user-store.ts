@@ -5,7 +5,7 @@ import { createJSONStorage, persist } from "zustand/middleware";
 
 export const useUserStore = create<UserStore>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       user: null,
       update: (updatedUser) => set(() => ({ user: updatedUser })),
       addFavoriteCity: (city) =>
@@ -24,7 +24,7 @@ export const useUserStore = create<UserStore>()(
           if (!state.user) return state;
 
           const updatedFavoriteCities = state.user.favoriteCities.filter(
-            (favoriteCity) => favoriteCity !== city
+            (favoriteCity) => favoriteCity.city !== city.city
           );
 
           return {
@@ -34,6 +34,14 @@ export const useUserStore = create<UserStore>()(
             },
           };
         }),
+      isFavoriteCity: (city) => {
+        const state = get();
+        if (!state.user || !state.user.favoriteCities) return false;
+
+        return state.user.favoriteCities.some(
+          (favoriteCity) => favoriteCity.city === city.city
+        );
+      },
     }),
     { name: "user", storage: createJSONStorage(() => encryptedStorage()) }
   )

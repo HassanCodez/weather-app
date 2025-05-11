@@ -17,7 +17,7 @@ export default function CitySearch() {
   };
 
   return (
-    <div className="container mx-auto py-10">
+    <div>
       <Card className="border-none">
         <CardHeader>
           <CardTitle>City Search</CardTitle>
