@@ -73,4 +73,5 @@ export interface WeatherCardTypes {
   windSpeed: number;
   clouds: number;
   humidity: number;
+  fav?: boolean;
 }

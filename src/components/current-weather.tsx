@@ -34,7 +34,7 @@ const CurrentWeather = () => {
 
   if (data && user) {
     return (
-      <div className="container mx-auto">
+      <div className="col-span-full container mx-auto">
         <WeatherCard
           city={user.city}
           icon={WEATHER_ICON_URL(data.weather[0].icon)}

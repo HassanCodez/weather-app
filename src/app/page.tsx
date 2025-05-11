@@ -3,7 +3,7 @@ import CurrentWeather from "@/components/current-weather";
 
 export default function Home() {
   return (
-    <div>
+    <div className="grid md:grid-cols-2">
       <CurrentWeather />
       <CitySearch />
     </div>

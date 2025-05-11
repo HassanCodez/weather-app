@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const WeatherCardSkeleton = () => {
   return (
-    <Card className="container mx-auto border-none animate-pulse">
+    <Card className="col-span-full container mx-auto border-none animate-pulse">
       <CardHeader>
         <CardTitle className="text-3xl bg-gray-300 rounded w-1/8 h-8"></CardTitle>
       </CardHeader>

@@ -1,4 +1,4 @@
-import { City } from "@/types/search-type";
+import { City, EnrichedResult } from "@/types/search-type";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useGetGroupWeather } from "./useGetGroupWeather";
 import debounce from "lodash.debounce";
@@ -7,14 +7,6 @@ import { WeatherResponse } from "@/types/weather-types";
 export type FuseResult = {
   item: City;
   score: number;
-};
-
-export type EnrichedResult = {
-  id: number;
-  name: string;
-  country: string;
-  temp: number;
-  icon: string;
 };
 
 export function useCitySearchWorker() {
@@ -96,11 +88,8 @@ export function useCitySearchWorker() {
         if (!weather) return null;
 
         return {
-          id: r.item.id,
-          name: r.item.name,
           country: r.item.country,
-          temp: weather.main.temp,
-          icon: weather.weather?.[0]?.icon || "",
+          ...weather,
         };
       })
       .filter(Boolean) as EnrichedResult[];

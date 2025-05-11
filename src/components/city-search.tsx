@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCitySearchWorker } from "@/hooks/useCitySearchWorker";
 import Image from "next/image";
-
+import { WEATHER_ICON_URL } from "@/config/config";
+import WeatherDialog from "./weather-dialog";
 export default function CitySearch() {
   const [query, setQuery] = useState("");
   const { search, results, loading } = useCitySearchWorker();
@@ -49,22 +50,35 @@ export default function CitySearch() {
                 </h3>
                 <div className="grid gap-2">
                   {results.map((city) => (
-                    <Card key={city.id} className="p-4">
-                      <div className="flex justify-between items-center">
-                        <h3 className="font-medium">
-                          {city.name}, {city.country}
-                        </h3>
-                        <span className="flex items-center gap-2">
-                          <h3 className="font-medium"> {city.temp}°C</h3>
-                          <Image
-                            src={`https://openweathermap.org/img/wn/${city.icon}@2x.png`}
-                            width={50}
-                            height={50}
-                            alt="weather icon"
-                          />
-                        </span>
-                      </div>
-                    </Card>
+                    <WeatherDialog
+                      key={city.id}
+                      city={`${city.name} ${city.country}`}
+                      clouds={city.clouds.all}
+                      desc={city.weather[0].description}
+                      feelsLike={city.main.feels_like}
+                      humidity={city.main.humidity}
+                      icon={WEATHER_ICON_URL(city.weather[0].icon)}
+                      main={city.weather[0].main}
+                      temp={city.main.temp}
+                      windSpeed={city.wind.speed}
+                    >
+                      <Card className="p-4">
+                        <div className="flex justify-between items-center">
+                          <h3 className="font-medium">
+                            {city.name}, {city.country}
+                          </h3>
+                          <span className="flex items-center gap-2">
+                            <h3 className="font-medium">{city.main.temp}°C</h3>
+                            <Image
+                              src={`https://openweathermap.org/img/wn/${city.weather[0].icon}@2x.png`}
+                              width={50}
+                              height={50}
+                              alt="weather icon"
+                            />
+                          </span>
+                        </div>
+                      </Card>
+                    </WeatherDialog>
                   ))}
                 </div>
               </div>

@@ -1,4 +1,4 @@
-import { Cloudy, Droplet, Wind } from "lucide-react";
+import { Cloudy, Droplet, Star, Wind } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { WeatherCardTypes } from "@/types/weather-types";
 import Image from "next/image";
@@ -13,14 +13,18 @@ const WeatherCard = ({
   windSpeed,
   clouds,
   humidity,
+  fav,
 }: WeatherCardTypes) => {
   return (
     <Card className="border-none">
       <CardHeader>
-        <CardTitle className="text-3xl">{city}</CardTitle>
+        <CardTitle className="text-3xl flex justify-between">
+          <h1>{city}</h1>
+          {fav && <Star />}
+        </CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col md:flex-row items-center gap-10">
-        <Image src={icon} width={150} height={150} alt="Weather" />
+        <Image src={icon} width={150} height={150} alt="Weather" priority />
         <div className="space-y-2">
           <span className="flex">
             <h2 className="text-4xl font-bold">{temp}</h2>
