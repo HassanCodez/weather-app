@@ -17,6 +17,7 @@ weather-app is a smart, fast, and modern weather web app built with Next.js. It 
 - 🗂️ **Weather Detail Drawer/Dialog** with real-time weather info
 - ❤️ **Favorites Management** with local persistence
 - 💾 **Offline Support & Persistent State** via Zustand & localStorage
+- 📦 **PWA Support** for installability and offline-first experience  
 - ⚙️ **Global State & Data Fetching** using Zustand + React Query
 - 🎨 **Beautiful UI** with Tailwind CSS + [shadcn/ui](https://ui.shadcn.com)
 - 🧱 **Modular & Scalable Architecture**
