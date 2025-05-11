@@ -33,9 +33,10 @@ const Favorites = () => {
         ) : (
           <div className="flex flex-col justify-start items-center">
             <Image src={"/empty.svg"} width={250} height={250} alt="empty" />
-            <p className="flex gap-1 items-center">
-              No favorite cities yet, click <Heart size={18} color="red" /> to
-              add it to the favorite
+            <p className="flex gap-1 items-center text-sm md:text-base">
+              No favorite cities yet, click{" "}
+              <Heart className="w-3 aspect-square" color="red" /> to add it to
+              the favorite
             </p>
           </div>
         )}
