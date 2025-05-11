@@ -35,7 +35,7 @@ export default function CitySearch() {
             {loading ? (
               <div className="flex justify-center py-8">
                 <Image
-                  src={"/loader.svg"}
+                  src={"/logo.png"}
                   width={50}
                   height={50}
                   alt="Loading..."
