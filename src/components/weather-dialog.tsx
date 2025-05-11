@@ -15,7 +15,6 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { WEATHER_ICON_URL } from "@/config/config";
 import WeatherCard from "./weather-card";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { WeatherCardTypes } from "@/types/weather-types";
